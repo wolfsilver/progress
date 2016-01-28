@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Progress</title>
+    <link rel="stylesheet" href="css.css" />
+</head>
+<body>
+
+    <script type="text/javascript">
+        var progress = function(a) { //[900, 60, "waiting"]
+            var b = window.document.getElementById("progress");
+            b || (b = window.document.createElement("div"),
+                b.id = "progress",
+                b.appendChild(window.document.createElement("dt")),
+                b.appendChild(window.document.createElement("dd")),
+                window.document.body.appendChild(b));
+
+            setTimeout(function() {
+                b.className = "";
+                var h = b.style;
+                h.transitionDuration = h.webkitTransitionDuration = "900ms";
+                h.width = (1.02 * a) + "%";
+
+                setTimeout(function() {
+                    if (a >= 100) {
+                        b.className = "done";
+                        return;
+                    }
+                    b.className = "waiting";
+                }, 900);
+            }, 0);
+        };
+    </script>
+</body>
+</html>

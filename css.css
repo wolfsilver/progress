@@ -1,0 +1,122 @@
+#progress {
+    position: fixed;
+    z-index: 2147483647;
+    left: -20px;
+    top: 1px;
+    height: 3px;
+    width: 0%;
+    background: #fff;
+    border-radius: 1.5px;
+    box-shadow: #0096ff 6.66666667px 0 20px 4px;
+    -moz-transition: width 500ms ease-out,opacity 500ms linear;
+    -webkit-transition: width 500ms ease-out,opacity 500ms linear;
+    transition: width 500ms ease-out,opacity 500ms linear;
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: width,opacity;
+}
+
+#progress.done {
+    opacity: 0
+}
+
+#progress dd,#progress dt {
+    position: absolute;
+    top: 0;
+    height: 2px;
+    box-shadow: #0096ff 1px 0 6px 1px;
+    border-radius: 100%
+}
+
+#progress dd {
+    opacity: .6;
+    width: 20px;
+    right: 0;
+    clip: rect(-6px,22px,14px,10px)
+}
+
+#progress dt {
+    opacity: .6;
+    width: 180px;
+    right: -80px;
+    clip: rect(-6px,90px,14px,-6px)
+}
+
+
+@-webkit-keyframes pulse {
+    30% {
+        opacity: .6
+    }
+
+    60% {
+        opacity: 0
+    }
+
+    to {
+        opacity: .6
+    }
+}
+
+@keyframes pulse {
+    30% {
+        opacity: .6
+    }
+
+    60% {
+        opacity: 0
+    }
+
+    to {
+        opacity: .6
+    }
+}
+
+#progress.waiting dd,#progress.waiting dt {
+    -moz-animation: pulse 2s ease-out 0s infinite;
+    -webkit-animation: pulse 2s ease-out 0s infinite;
+    animation: pulse 2s ease-out 0s infinite
+}
+
+@-webkit-keyframes beyondpulse {
+    30% {
+        opacity: 1
+    }
+
+    60% {
+        opacity: .6
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes beyondpulse {
+    30% {
+        opacity: 1
+    }
+
+    60% {
+        opacity: .6
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+#progress dd, #progress dt {
+    display: none
+}
+
+
+#progress.waiting {
+    -moz-animation: beyondpulse 2s ease-out 0s infinite;
+    -webkit-animation: beyondpulse 2s ease-out 0s infinite;
+    animation: beyondpulse 2s ease-out 0s infinite;
+    -moz-animation: beyondpulse 2s ease-out 0s infinite;
+    -webkit-animation: beyondpulse 2s ease-out 0s infinite;
+    animation: beyondpulse 2s ease-out 0s infinite
+}
