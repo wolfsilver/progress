@@ -8,29 +8,54 @@
 <body>
 
     <script type="text/javascript">
-        var progress = function(a) { //[900, 60, "waiting"]
-            var b = window.document.getElementById("progress");
-            b || (b = window.document.createElement("div"),
-                b.id = "progress",
-                b.appendChild(window.document.createElement("dt")),
-                b.appendChild(window.document.createElement("dd")),
-                window.document.body.appendChild(b));
 
-            setTimeout(function() {
-                b.className = "";
-                var h = b.style;
-                h.transitionDuration = h.webkitTransitionDuration = "900ms";
-                h.width = (1.02 * a) + "%";
+        var progress = function(percent, noControl) {
+         percent = parseInt(percent);
+         var b = window.document.getElementById("progress");
+         b || (b = window.document.createElement("div"),
+             b.id = "progress",
+             b.appendChild(window.document.createElement("dt")),
+             b.appendChild(window.document.createElement("dd")),
+             window.document.body.appendChild(b));
 
-                setTimeout(function() {
-                    if (a >= 100) {
-                        b.className = "done";
-                        return;
-                    }
-                    b.className = "waiting";
-                }, 900);
-            }, 0);
+         setTimeout(function() {
+             window.progressTimer && clearTimeout(window.progressTimer);
+             b.className = "";
+             var h = b.style;
+             h.width = (1.02 * percent) + "%";
+
+             if (percent >= 100) {
+                 setTimeout(function() {
+                     b.className = "done";
+
+                     setTimeout(function() {
+                         h.width = 0;
+                     }, 600);
+                 }, 0);
+                 return;
+             }
+             window.progressTimer = setTimeout(function() {
+                 b.className = "waiting";
+             }, 900);
+         }, 0);
         };
+
+        var i = 0;
+
+        function test() {
+         if (i > 100) {
+             return;
+         }
+         var t = Math.floor(Math.random() * 2000);
+         console.log('t: ' + t);
+         setTimeout(function() {
+             progress(i = Math.floor(Math.random() * 20) + i);
+             console.log('          i: ' + i)
+                 // b.set(i = Math.floor(Math.random() * 10) + i);
+             test();
+         }, t)
+        }
+        test();
     </script>
 </body>
 </html>
